@@ -5,7 +5,4 @@ export default class training extends Component {
         super(props);
     }
 
-    render() {
-
-    }
 }
