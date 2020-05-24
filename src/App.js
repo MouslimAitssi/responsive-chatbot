@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import training from './components/training';
 import { Navbar, NavbarBrand } from 'reactstrap';
-import chatbot from './images/chatbot.jpg'
-import user from './images/user.png'
+import chatbot from './images/chatbot.jpg';
+import Response from './components/reponse';
+import Message from './components/message';
 
 class App extends Component {
   
@@ -12,7 +12,7 @@ class App extends Component {
   }
 
   render() {
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
     return(
           <div className="container">
             <div className="msg-header">
@@ -34,28 +34,8 @@ class App extends Component {
                 <div className="msg-inbox">
                   <div className="chats">
                     <div className="msg-page">
-                      <div className="received-chats">
-                        <div className="received-chats-img">
-                          <img src={chatbot} alt="chatbot img"/>
-                        </div>
-                        <div className="received-msg">
-                          <div className="received-msg-inbox">
-                            <p>Bonjour, comment allez-vous?</p>
-                            <span className="time">{new Date().getHours()}:{("0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length)} | {monthNames[new Date().getMonth()]} {("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length)}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="outgoing-chats">
-                        <div className="outgoing-chats-img">
-                          <img src={user} alt="user img"/>
-                        </div>
-
-                        <div className="outgoing-chats-msg">
-                            <p>Hamdolillah akhawa lah y3ezzek.</p>
-                            <span className="time">{new Date().getHours()}:{("0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length)} | {monthNames[new Date().getMonth()]} {("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length)}</span>
-                        </div>
-                      </div>
+                      <Message />
+                      <Response />
                     </div>
                   </div>
                 </div>
