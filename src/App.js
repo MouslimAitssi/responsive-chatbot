@@ -12,6 +12,7 @@ class App extends Component {
   }
 
   render() {
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     return(
           <div className="container">
             <div className="msg-header">
@@ -19,7 +20,7 @@ class App extends Component {
                 <img src={chatbot} alt="chatbot img"/>
               </div>
               <div className="active">
-                <h4>Votre chatbot.</h4>
+                <h4>Votre CHATBOT</h4>
                 <h6>Parlez avec moi</h6>
               </div>
               <div className="header-icons">
@@ -40,7 +41,7 @@ class App extends Component {
                         <div className="received-msg">
                           <div className="received-msg-inbox">
                             <p>Bonjour, comment allez-vous?</p>
-                            <span className="time">11:01 PM | October 11</span>
+                            <span className="time">{new Date().getHours()}:{("0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length)} | {monthNames[new Date().getMonth()]} {("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length)}</span>
                           </div>
                         </div>
                       </div>
@@ -52,9 +53,8 @@ class App extends Component {
 
                         <div className="outgoing-chats-msg">
                             <p>Hamdolillah akhawa lah y3ezzek.</p>
-                            <span className="time">11:01 PM | October 11</span>
+                            <span className="time">{new Date().getHours()}:{("0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length)} | {monthNames[new Date().getMonth()]} {("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length)}</span>
                         </div>
-                        
                       </div>
                     </div>
                   </div>
