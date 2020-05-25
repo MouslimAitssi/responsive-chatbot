@@ -8,6 +8,10 @@
 
 }
 
+body{
+  background-color: aquamarine;
+}
+
 img {
   max-width: 130%;
   border-radius: 50%;
@@ -70,10 +74,12 @@ img {
 .msg-inbox {
   border: 1px solid #ccc;
   overflow:hidden;
-  padding-bottom: 30px;
+
+  
 }
 
 .chats{
+  background-color: #fff;
   padding: 30px 15px 0 25px;
 }
 
@@ -102,7 +108,7 @@ img {
 .received-msg-inbox p {
   background: #efefef none repeat scroll 0 0;
   border-radius: 10px;
-  color: #646464;
+  color: black;
   font-size: 17px;
   margin: 0;
   padding: 5px 10px 12px 12px;
@@ -119,7 +125,7 @@ img {
   background: #007bff none repeat scroll 0 0;
   color: #fff;
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 17px;
   margin: 0;
   padding: 5px 10px 12px 12px;
   width: 100%;
@@ -143,4 +149,34 @@ img {
   display: block;
   font-size: 12px;
   margin: 8px 0 0;
+}
+
+.msg-bottom
+{
+  position: relative;
+  height: 10%;
+  background-color: #007bff;
+}
+
+.input-group
+{
+  float: right;
+  margin-top: 13px;
+  margin-right: 20px;
+  outline:none !important;
+  border-radius: 30px;
+  width: 61% !important;
+  background-color: #fff;
+}
+
+.form-control {
+  border: none !important;
+  border-radius: 20px !important;
+}
+
+.input-group-text{
+  background: transparent !important;
+  border: none !important;
+
+
 }

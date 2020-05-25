@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Navbar, NavbarBrand } from 'reactstrap';
+//import { Navbar, NavbarBrand } from 'reactstrap';
 import chatbot from './images/chatbot.jpg';
 import Response from './components/reponse';
 import Message from './components/message';
+import Input from './components/input'
 
 class App extends Component {
   
@@ -31,14 +32,13 @@ class App extends Component {
             </div>
             <div className="chat-page">
               <div className="msg-inbox">
-                <div className="msg-inbox">
                   <div className="chats">
                     <div className="msg-page">
                       <Message />
                       <Response />
                     </div>
                   </div>
-                </div>
+                  <Input/>    
               </div>
             </div>
           </div>
