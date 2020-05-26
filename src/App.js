@@ -44,7 +44,6 @@ class App extends Component {
                 <NavbarBrand href="/">
                   <div className="msg-header-img">
                     <img src = {chatbot} alt="chatbot img"/>
-                    
                   </div>
                   <div className="active"><h3>CHATBOT</h3></div>
                 </NavbarBrand>
@@ -81,11 +80,10 @@ class App extends Component {
                         <div className="input-group">
                             <input type="text" className="form-control" placeholder="write message..." ref="message"/>
                             <div className="input-group-append">
-                                <Button className="input-group-text" onClick={(e) =>{this.getMessage()}}><i className="fa fa-paper-plane"></i></Button>
+                                <Button className="input-group-text" onClick={(e) =>{this.getMessage(); this.refs.message.value=""}}><i className="fa fa-paper-plane"></i></Button>
                             </div>
                         </div>
                     </div>
-  
                 </div>
               </div>
             </div>
