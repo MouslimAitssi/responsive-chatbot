@@ -8,12 +8,10 @@ export default class Message extends Component {
 
     constructor(props) {
         super(props);
-
         this.state={
             id:"",
             message:""
         }
-
     }
 
     render() {

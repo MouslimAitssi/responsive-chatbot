@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import { Navbar, NavbarBrand } from 'reactstrap';
 import chatbot from './images/chatbot.jpg';
-import Message from './components/messageComponent';
 import { Button} from 'reactstrap';
 import Menu from './components/MenuComponent';
 
@@ -20,6 +19,9 @@ class App extends Component {
 
     const msgSent = {id:"user", msg: this.refs.message.value } ;
     this.setState({message:msgSent});
+    this.setState(prevState => ({
+      messages: [...prevState.messages, msgSent]
+    }))
   }
 
   onInputChanged() {
@@ -28,16 +30,14 @@ class App extends Component {
       return (<div></div>);
     }
     else {
-      
       return(
-        <Menu message = {this.state.message}/>
-        
+        <Menu message = {this.state.message} messages={this.state.messages}/>        
       );
-      
     }
   }
 
   render() {
+    
     return(
           <div>
             <Navbar dark color= "primary">

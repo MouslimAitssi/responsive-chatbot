@@ -14,17 +14,17 @@ export default class Menu extends Component {
 
     render() {
 
-        /*console.log(this.props.messages);
+        console.log(this.props.messages);
         const menu = this.props.messages.map((message) =>{
             return (
-                {message}
+                <Message id={message.id} message={message.msg}/>
             );
         }
-        );*/
-        console.log(this.props.message.msg);
-
+        );
+        console.log(menu);
         return(
-            <Message id={this.props.message.id} message={this.props.message.msg}/>
+            <div className="col">{menu}</div>
+            
         );
     }
 }
