@@ -4,13 +4,14 @@ import { Navbar, NavbarBrand } from 'reactstrap';
 import chatbot from './images/chatbot.jpg';
 import { Button} from 'reactstrap';
 import Menu from './components/MenuComponent';
+import { RESPONSES } from './shared/ques-rep';
 
 class App extends Component {
   
   constructor(props) {
     super(props);
     this.state = {
-      message:"",
+      responses:RESPONSES,
       messages : []
     };
   }
@@ -18,9 +19,30 @@ class App extends Component {
   getMessage() {
 
     const msgSent = {id:"user", msg: this.refs.message.value } ;
-    this.setState({message:msgSent});
+    //this.setState({message:msgSent});
     this.setState(prevState => ({
       messages: [...prevState.messages, msgSent]
+    }))
+    this.getResponse(msgSent.msg);
+  }
+
+  getResponse(messageSent) {
+    var response;
+    for(var i=0; i<this.state.responses.length; i++) {
+      console.log(this.state.responses[i][0]);
+      if(this.state.responses[i][0] == messageSent){
+        response = this.state.responses[i][1];
+        break;
+      }
+      else {
+        response = "désolé, pouvez-vous reformuler?";
+      }
+    }
+
+    const msgResponse = {id:"chatbot", msg: response};
+    //this.setState({response:msgResponse});
+    this.setState(prevState => ({
+      messages: [...prevState.messages, msgResponse]
     }))
   }
 
@@ -39,7 +61,7 @@ class App extends Component {
   render() {
     
     return(
-          <div>
+          <div className="col">
             <Navbar dark color= "primary">
                 <NavbarBrand href="/">
                   <div className="msg-header-img">

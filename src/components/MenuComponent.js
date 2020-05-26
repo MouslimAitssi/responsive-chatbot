@@ -10,7 +10,7 @@ export default class Menu extends Component {
 
     render() {
         var k=0;
-        console.log(this.props.messages);
+        //console.log(this.props.messages);
         const menu = this.props.messages.map((message) =>{
             return (
                 <div key={k++}>
@@ -19,7 +19,6 @@ export default class Menu extends Component {
             );
         }
         );
-        console.log(menu);
         return(
             <div className="col">
                 {menu}
