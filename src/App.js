@@ -3,30 +3,37 @@ import './App.css';
 import { Navbar, NavbarBrand } from 'reactstrap';
 import chatbot from './images/chatbot.jpg';
 import Message from './components/messageComponent';
-import { Button, Input } from 'reactstrap';
+import { Button} from 'reactstrap';
+import Menu from './components/MenuComponent';
 
 class App extends Component {
   
   constructor(props) {
     super(props);
-    this.state = {message:""};
+    this.state = {
+      message:"",
+      messages : []
+    };
   }
 
   getMessage() {
-    this.setState({message:this.refs.message.value});
+
+    const msgSent = {id:"user", msg: this.refs.message.value } ;
+    this.setState({message:msgSent});
   }
-
-
 
   onInputChanged() {
 
     if(this.state.message == "") {
-      return <div></div>
+      return (<div></div>);
     }
     else {
+      
       return(
-        <Message msg = {this.state.message}/>
+        <Menu message = {this.state.message}/>
+        
       );
+      
     }
   }
 
@@ -41,7 +48,7 @@ class App extends Component {
                   </div>
                   <div className="active"><h3>CHATBOT</h3></div>
                 </NavbarBrand>
-                <NavbarBrand>Parlez avec votre chatbot medecin, éspérons que vous seriez satisfaits.</NavbarBrand>
+                <NavbarBrand>Parlez avec votre chatbot médecin, éspérons que vous seriez satisfaits.</NavbarBrand>
             </Navbar>
             <div className="container">
               <div className="msg-header">
@@ -62,17 +69,13 @@ class App extends Component {
                 <div className="msg-inbox">
                     <div className="chats">
                       <div className="msg-page">
-                        <Message id="user" msg="Bonjour, comment allez-vous?"/>
-                        <Message id="chatbot" msg="Bien, merci."/>
+                        {this.onInputChanged()}
                       </div>
                     </div>
                     
                     <div className="msg-bottom">
                         <div className="bottom-icons">
-                            <i className="fa fa-plus-circle"></i>
-                            <i className="fa fa-camera"></i>
-                            <i className="fa fa-microphone"></i>
-                            <i className="fa fa-smile-o"></i>
+                            <i className="fa fa-plus-circle"></i><i className="fa fa-camera"></i><i className="fa fa-microphone"></i><i className="fa fa-smile-o"></i>
                         </div>
 
                         <div className="input-group">
