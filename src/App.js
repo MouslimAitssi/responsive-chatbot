@@ -61,7 +61,7 @@ class App extends Component {
   render() {
     
     return(
-          <div className="col">
+          <div>
             <Navbar dark color= "primary">
                 <NavbarBrand href="/">
                   <div className="msg-header-img">
