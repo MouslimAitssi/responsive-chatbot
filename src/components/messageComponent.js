@@ -16,7 +16,7 @@ export default class Message extends Component {
 
     render() {
         
-        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        
         if(this.props.id =="chatbot"){
             return(
                 <div className="received-chats">
@@ -26,7 +26,7 @@ export default class Message extends Component {
                     <div className="received-msg">
                         <div className="received-msg-inbox">
                            <p>{this.props.message}</p>
-                            <span className="time">{new Date().getHours()}:{("0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length)} | {monthNames[new Date().getMonth()]} {("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length)}</span>
+                           <span className="time">{this.props.date}</span>
                        </div>
                    </div>
                </div>
@@ -41,7 +41,7 @@ export default class Message extends Component {
                     </div>
                     <div className="outgoing-chats-msg">
                       <p>{this.props.message}</p>
-                      <span className="time">{new Date().getHours()}:{("0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length)} | {monthNames[new Date().getMonth()]} {("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length)}</span>
+                      <span className="time">{this.props.date}</span>
                     </div>
                 </div>
             );

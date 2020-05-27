@@ -14,13 +14,13 @@ export default class Menu extends Component {
         const menu = this.props.messages.map((message) =>{
             return (
                 <div key={k++}>
-                    <Message id={message.id} message={message.msg}/>
+                    <Message id={message.id} message={message.msg} date={message.date}/>
                 </div>
             );
         }
         );
         return(
-            <div className="col">
+            <div>
                 {menu}
             </div>
         );

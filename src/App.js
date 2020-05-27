@@ -18,7 +18,10 @@ class App extends Component {
 
   getMessage() {
 
-    const msgSent = {id:"user", msg: this.refs.message.value } ;
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    const dateSent= new Date().getHours() + ":"+("0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length) + " | " + monthNames[new Date().getMonth()] + " " + ("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length);
+    const msgSent = {id:"user", msg: this.refs.message.value, date: dateSent } ;
     //this.setState({message:msgSent});
     this.setState(prevState => ({
       messages: [...prevState.messages, msgSent]
@@ -27,6 +30,8 @@ class App extends Component {
   }
 
   getResponse(messageSent) {
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
     var response;
     for(var i=0; i<this.state.responses.length; i++) {
       console.log(this.state.responses[i][0]);
@@ -38,8 +43,8 @@ class App extends Component {
         response = "désolé, pouvez-vous reformuler?";
       }
     }
-
-    const msgResponse = {id:"chatbot", msg: response};
+    const dateResponse= new Date().getHours() + ":" + ("0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length) + " | " + monthNames[new Date().getMonth()] + " " + ("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length);
+    const msgResponse = {id:"chatbot", msg: response, date:dateResponse};
     //this.setState({response:msgResponse});
     this.setState(prevState => ({
       messages: [...prevState.messages, msgResponse]
@@ -53,7 +58,7 @@ class App extends Component {
     }
     else {
       return(
-        <Menu message = {this.state.message} messages={this.state.messages}/>        
+        <Menu messages={this.state.messages}/>        
       );
     }
   }
