@@ -20,7 +20,7 @@ class App extends Component {
 
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-    const dateSent= new Date().getHours() + ":"+("0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length) + " | " + monthNames[new Date().getMonth()] + " " + ("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length);
+    const dateSent= new Date().getHours() + ":" + ( "0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length) + " | " + monthNames[new Date().getMonth()] + " " + ("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length);
     const msgSent = {id:"user", msg: this.refs.message.value, date: dateSent } ;
     //this.setState({message:msgSent});
     this.setState(prevState => ({
@@ -93,24 +93,24 @@ class App extends Component {
               </div>
               <div className="chat-page">
                 <div className="msg-inbox">
-                    <div className="chats">
-                      <div className="msg-page">
-                        {this.onInputChanged()}
+                  <div className="chats">
+                    <div className="msg-page">
+                      {this.onInputChanged()}
+                    </div>
+                  </div>
+                    
+                  <div className="msg-bottom">
+                    <div className="bottom-icons">
+                      <i className="fa fa-plus-circle"></i><i className="fa fa-camera"></i><i className="fa fa-microphone"></i><i className="fa fa-smile-o"></i>
+                    </div>
+
+                    <div className="input-group">
+                      <input type="text" className="form-control" placeholder="write message..." ref="message"/>
+                      <div className="input-group-append">
+                        <Button className="input-group-text" onClick={(e) =>{this.getMessage(); this.refs.message.value=""}}><i className="fa fa-paper-plane"></i></Button>
                       </div>
                     </div>
-                    
-                    <div className="msg-bottom">
-                        <div className="bottom-icons">
-                            <i className="fa fa-plus-circle"></i><i className="fa fa-camera"></i><i className="fa fa-microphone"></i><i className="fa fa-smile-o"></i>
-                        </div>
-
-                        <div className="input-group">
-                            <input type="text" className="form-control" placeholder="write message..." ref="message"/>
-                            <div className="input-group-append">
-                                <Button className="input-group-text" onClick={(e) =>{this.getMessage(); this.refs.message.value=""}}><i className="fa fa-paper-plane"></i></Button>
-                            </div>
-                        </div>
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>
