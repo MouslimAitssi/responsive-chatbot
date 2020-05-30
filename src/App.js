@@ -16,6 +16,17 @@ class App extends Component {
     };
   }
 
+
+  tf(word) {
+    var tf = 0;
+    for(var i = 0; i < RESPONSES.length; i++) {
+      if(RESPONSES[i][0].includes(word)) {
+        tf++;
+      }
+    }
+    return tf;
+  }
+
   getMessage() {
 
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
