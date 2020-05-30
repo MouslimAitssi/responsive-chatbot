@@ -37,8 +37,15 @@ class App extends Component {
     return n;
   }
 
+  idf(string) {
+    var idf = 0
+    for(var i = 0; i < RESPONSES.length; i++) {
+      idf = idf + tf(RESPONSES[i][0], string, true);
+    }
+    return idf;
+  }
 
-  
+
 
   getMessage() {
 
