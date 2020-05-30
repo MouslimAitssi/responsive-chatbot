@@ -17,20 +17,32 @@ class App extends Component {
   }
 
 
-  tf(word) {
-    var tf = 0;
-    for(var i = 0; i < RESPONSES.length; i++) {
-      if(RESPONSES[i][0].includes(word)) {
-        tf++;
-      }
+  tf(string, subString, allowOverlapping) {
+
+    string += "";
+    subString += "";
+    if (subString.length <= 0) return (string.length + 1);
+
+    var n = 0,
+        pos = 0,
+        step = allowOverlapping ? 1 : subString.length;
+
+    while (true) {
+        pos = string.indexOf(subString, pos);
+        if (pos >= 0) {
+            ++n;
+            pos += step;
+        } else break;
     }
-    return tf;
+    return n;
   }
+
+
+  
 
   getMessage() {
 
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
     const dateSent= new Date().getHours() + ":" + ( "0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length) + " | " + monthNames[new Date().getMonth()] + " " + ("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length);
     const msgSent = {id:"user", msg: this.refs.message.value, date: dateSent } ;
     //this.setState({message:msgSent});
@@ -42,7 +54,6 @@ class App extends Component {
 
   getResponse(messageSent) {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
     var response;
     for(var i=0; i<this.state.responses.length; i++) {
       console.log(this.state.responses[i][0]);
