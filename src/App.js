@@ -17,7 +17,7 @@ class App extends Component {
   }
 
 
-  tf(string, subString, allowOverlapping) {
+  occurences(string, subString, allowOverlapping) {
 
     string += "";
     subString += "";
@@ -37,15 +37,25 @@ class App extends Component {
     return n;
   }
 
-  idf(string) {
-    var idf = 0
-    for(var i = 0; i < RESPONSES.length; i++) {
-      idf = idf + tf(RESPONSES[i][0], string, true);
+  similarity(string1, string2) {
+
+    var freq = 0;
+    var s1 = string1.split(" ");
+    var s2 = string2.split(" ");
+  
+    for(var i = 0; i < s1.length; i++) {
+      freq = freq + occurences(string2, s1[i], true);
     }
-    return idf;
+    return freq/(s1.length*s2.length);
   }
 
-
+  df(string) {
+    var df = 0
+    for(var i = 0; i < this.state.responses.length; i++) {
+      df = df + tf(this.state.responses[i][0], string, true);
+    }
+    return df;
+  }
 
   getMessage() {
 
@@ -61,18 +71,21 @@ class App extends Component {
 
   getResponse(messageSent) {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    var response;
-    for(var i=0; i<this.state.responses.length; i++) {
-      console.log(this.state.responses[i][0]);
-      if(this.state.responses[i][0] == messageSent){
-        response = this.state.responses[i][1];
-        break;
-      }
-      else {
-        response = "désolé, pouvez-vous reformuler?";
+    var response, index = 0, freq = 0, sim = 0;
+    for(var i = 0; i < this.state.responses; i++) {
+      sim = similarity(messageSent, this.state.responses[i][0]);
+      if (sim > freq) {
+        freq = sim;
+        index = i;
       }
     }
-    const dateResponse= new Date().getHours() + ":" + ("0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length) + " | " + monthNames[new Date().getMonth()] + " " + ("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length);
+    if(freq > 0.5) {
+      response = this.state.responses[index][1];
+    }
+    else {
+      response = "désolé, pouvez vous reformuler?";
+    }
+    const dateResponse = new Date().getHours() + ":" + ("0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length) + " | " + monthNames[new Date().getMonth()] + " " + ("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length);
     const msgResponse = {id:"chatbot", msg: response, date:dateResponse};
     //this.setState({response:msgResponse});
     this.setState(prevState => ({
