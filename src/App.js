@@ -44,23 +44,23 @@ class App extends Component {
     var s2 = string2.split(" ");
   
     for(var i = 0; i < s1.length; i++) {
-      freq = freq + occurences(string2, s1[i], true);
+      freq = freq + this.occurences(string2, s1[i], true);
     }
     return freq/(s1.length*s2.length);
   }
 
-  df(string) {
+  /*df(string) {
     var df = 0
     for(var i = 0; i < this.state.responses.length; i++) {
       df = df + tf(this.state.responses[i][0], string, true);
     }
     return df;
-  }
+  }*/
 
   getMessage() {
 
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    const dateSent= new Date().getHours() + ":" + ( "0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length) + " | " + monthNames[new Date().getMonth()] + " " + ("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length);
+    const dateSent= new Date().getHours() + ":" + ( "0" + new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length) + " | " + monthNames[new Date().getMonth()] + " " + ("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length);
     const msgSent = {id:"user", msg: this.refs.message.value, date: dateSent } ;
     //this.setState({message:msgSent});
     this.setState(prevState => ({
@@ -72,17 +72,20 @@ class App extends Component {
   getResponse(messageSent) {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     var response, index = 0, freq = 0, sim = 0;
-    for(var i = 0; i < this.state.responses; i++) {
-      sim = similarity(messageSent, this.state.responses[i][0]);
+    for(var i = 0; i < this.state.responses.length; i++) {
+      sim = this.similarity(messageSent, this.state.responses[i][0]);
+      
       if (sim > freq) {
         freq = sim;
         index = i;
       }
     }
-    if(freq > 0.5) {
+    console.log(freq);
+    if(freq > 0.1) {
       response = this.state.responses[index][1];
     }
     else {
+     
       response = "désolé, pouvez vous reformuler?";
     }
     const dateResponse = new Date().getHours() + ":" + ("0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length) + " | " + monthNames[new Date().getMonth()] + " " + ("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length);
