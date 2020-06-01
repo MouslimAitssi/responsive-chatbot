@@ -37,6 +37,12 @@ class App extends Component {
     return n;
   }
 
+  tf(word, string) {
+    var s1 = string.split(" ");
+    return this.occurences(string, word, true)/s1.length;
+  }
+  
+
   similarity(string1, string2) {
 
     var freq = 0;
@@ -85,7 +91,6 @@ class App extends Component {
       response = this.state.responses[index][1];
     }
     else {
-     
       response = "Désolé, je n'ai pas bien compris, pouvez vous reformuler?";
     }
     const dateResponse = new Date().getHours() + ":" + ("0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length) + " | " + monthNames[new Date().getMonth()] + " " + ("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length);
@@ -160,7 +165,6 @@ class App extends Component {
                       <input id="myInput"type="text" className="form-control" placeholder="write message..." ref="message" onKeyPress={this.enterPressed.bind(this)}/>
                       <div className="input-group-append">
                         <Button id = "myBtn" className="input-group-text" onClick={(e) =>{this.getMessage(); this.refs.message.value=""} }><i className="fa fa-paper-plane"></i></Button>
-                        
                       </div>
                     </div>
                   </div>
