@@ -86,7 +86,7 @@ class App extends Component {
     }
     else {
      
-      response = "désolé, pouvez vous reformuler?";
+      response = "Désolé, je n'ai pas bien compris, pouvez vous reformuler?";
     }
     const dateResponse = new Date().getHours() + ":" + ("0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length) + " | " + monthNames[new Date().getMonth()] + " " + ("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length);
     const msgResponse = {id:"chatbot", msg: response, date:dateResponse};
@@ -108,6 +108,13 @@ class App extends Component {
     }
   }
 
+  enterPressed(event) {
+    var code = event.keyCode || event.which;
+    if(code === 13) {
+      this.getMessage(); this.refs.message.value="";
+    } 
+  }
+
   render() {
     
     return(
@@ -119,7 +126,7 @@ class App extends Component {
                   </div>
                   <div className="active"><h3>CHATBOT</h3></div>
                 </NavbarBrand>
-                <NavbarBrand>Parlez avec votre chatbot médecin, éspérons que vous seriez satisfaits.</NavbarBrand>
+                <NavbarBrand>Parlez avec votre chatbot, éspérons que vous seriez satisfaits.</NavbarBrand>
             </Navbar>
             <div className="container">
               <div className="msg-header">
@@ -150,9 +157,10 @@ class App extends Component {
                     </div>
 
                     <div className="input-group">
-                      <input type="text" className="form-control" placeholder="write message..." ref="message"/>
+                      <input id="myInput"type="text" className="form-control" placeholder="write message..." ref="message" onKeyPress={this.enterPressed.bind(this)}/>
                       <div className="input-group-append">
-                        <Button className="input-group-text" onClick={(e) =>{this.getMessage(); this.refs.message.value=""}}><i className="fa fa-paper-plane"></i></Button>
+                        <Button id = "myBtn" className="input-group-text" onClick={(e) =>{this.getMessage(); this.refs.message.value=""} }><i className="fa fa-paper-plane"></i></Button>
+                        
                       </div>
                     </div>
                   </div>
