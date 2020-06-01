@@ -24,6 +24,7 @@ img {
   border-bottom: none;
   display: inline-block;
   background-color: #007bff;
+  
 }
 
 .msg-header-img 
@@ -69,12 +70,13 @@ img {
 
 .chat-page{
   padding: 0 0 50px 0;
+  
 }
 
 .msg-inbox {
   border: 1px solid #ccc;
   overflow:hidden;
-
+  background-color: #007bff;
   
 }
 
@@ -84,7 +86,7 @@ img {
 }
 
 .msg-page{
-  height: 516px;
+  height: 450px;
   overflow-y: auto;
 }
 
@@ -162,6 +164,7 @@ img {
 {
   float: right;
   margin-top: 13px;
+  margin-bottom: 13px;
   margin-right: 20px;
   outline:none !important;
   border-radius: 30px;

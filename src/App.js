@@ -18,7 +18,6 @@ class App extends Component {
 
 
   occurences(string, subString, allowOverlapping) {
-
     string += "";
     subString += "";
     if (subString.length <= 0) return (string.length + 1);
@@ -38,33 +37,36 @@ class App extends Component {
   }
 
   tf(word, string) {
-    var s1 = string.split(" ");
-    return this.occurences(string, word, true)/s1.length;
+    var s = string.split(" ");
+    return this.occurences(string, word, true)/(s.length);
   }
-  
+
+  idf(word){
+    var inc = 0;
+    for(var i = 0; i < RESPONSES.length; i++) 
+    {
+      if(RESPONSES[i][0].includes(word)) {
+        inc++;
+      }
+    }
+    return Math.log10(RESPONSES.length/inc);
+  }
 
   similarity(string1, string2) {
 
-    var freq = 0;
+    var tfidf = 0;
     var s1 = string1.split(" ");
     var s2 = string2.split(" ");
   
     for(var i = 0; i < s1.length; i++) {
-      freq = freq + this.occurences(string2, s1[i], true);
+      tfidf = tfidf + this.tf(s1[i], string2)*this.idf(s1[i]);
     }
-    return freq/(s1.length*s2.length);
+
+    return tfidf;
   }
 
-  /*df(string) {
-    var df = 0
-    for(var i = 0; i < this.state.responses.length; i++) {
-      df = df + tf(this.state.responses[i][0], string, true);
-    }
-    return df;
-  }*/
 
   getMessage() {
-
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const dateSent= new Date().getHours() + ":" + ( "0" + new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length) + " | " + monthNames[new Date().getMonth()] + " " + ("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length);
     const msgSent = {id:"user", msg: this.refs.message.value, date: dateSent } ;
@@ -87,7 +89,7 @@ class App extends Component {
       }
     }
     console.log(freq);
-    if(freq > 0.1) {
+    if(freq > 0.01) {
       response = this.state.responses[index][1];
     }
     else {
