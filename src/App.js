@@ -38,39 +38,43 @@ class App extends Component {
 
   tf(word, string) {
     var s = string.split(" ");
+    console.log("tf : " + word + " "+ this.occurences(string, word, true)/(s.length));
     return this.occurences(string, word, true)/(s.length);
   }
 
   idf(word){
-    var inc = 0;
+    var inc = 1;
     for(var i = 0; i < RESPONSES.length; i++) 
     {
       if(RESPONSES[i][0].includes(word)) {
         inc++;
       }
     }
+    console.log("idf : " + word + " " +inc);
     return Math.log10(RESPONSES.length/inc);
+  }
+
+  tfidf(word, string) {
+    var tfidf = this.tf(word, string)*this.idf(word);
+    console.log("tfidf : " + word + " " + tfidf);
+    return tfidf;
   }
 
   similarity(string1, string2) {
 
-    var tfidf = 0;
+    var sim = 0;
     var s1 = string1.split(" ");
-    var s2 = string2.split(" ");
-  
     for(var i = 0; i < s1.length; i++) {
-      tfidf = tfidf + this.tf(s1[i], string2)*this.idf(s1[i]);
+      sim = sim + this.tfidf(s1[i], string2);
     }
-
-    return tfidf;
+    console.log("sim : " + sim);
+    return sim;
   }
-
 
   getMessage() {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const dateSent= new Date().getHours() + ":" + ( "0" + new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length) + " | " + monthNames[new Date().getMonth()] + " " + ("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length);
     const msgSent = {id:"user", msg: this.refs.message.value, date: dateSent } ;
-    //this.setState({message:msgSent});
     this.setState(prevState => ({
       messages: [...prevState.messages, msgSent]
     }))
@@ -97,7 +101,6 @@ class App extends Component {
     }
     const dateResponse = new Date().getHours() + ":" + ("0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length) + " | " + monthNames[new Date().getMonth()] + " " + ("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length);
     const msgResponse = {id:"chatbot", msg: response, date:dateResponse};
-    //this.setState({response:msgResponse});
     this.setState(prevState => ({
       messages: [...prevState.messages, msgResponse]
     }))
@@ -133,7 +136,6 @@ class App extends Component {
                   </div>
                   <div className="active"><h3>CHATBOT</h3></div>
                 </NavbarBrand>
-                <NavbarBrand>Parlez avec votre chatbot, éspérons que vous seriez satisfaits.</NavbarBrand>
             </Navbar>
             <div className="container">
               <div className="msg-header">

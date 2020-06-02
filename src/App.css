@@ -160,6 +160,10 @@ img {
   background-color: #007bff;
 }
 
+.bottom_icons {
+  padding: 3px;
+}
+
 .input-group
 {
   float: right;
