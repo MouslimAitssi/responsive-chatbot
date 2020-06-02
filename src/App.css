@@ -160,8 +160,9 @@ img {
   background-color: #007bff;
 }
 
-.bottom_icons {
-  padding: 3px;
+.bottom-icons .fa{
+  
+  margin:3px;
 }
 
 .input-group
