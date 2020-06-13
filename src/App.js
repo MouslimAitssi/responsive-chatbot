@@ -5,13 +5,14 @@ import chatbot from './images/chatbot.jpg';
 import { Button} from 'reactstrap';
 import Menu from './components/MenuComponent';
 import { RESPONSES } from './shared/ques-rep';
+import { liste } from './shared/file'
 
 class App extends Component {
   
   constructor(props) {
     super(props);
     this.state = {
-      responses:RESPONSES,
+      responses:liste,
       messages : []
     };
   }
