@@ -4,7 +4,7 @@ import { Navbar, NavbarBrand } from 'reactstrap';
 import chatbot from './images/chatbot.jpg';
 import { Button} from 'reactstrap';
 import Menu from './components/MenuComponent';
-import { RESPONSES } from './shared/ques-rep';
+//import { RESPONSES } from './shared/ques-rep';
 import { liste } from './shared/file'
 
 class App extends Component {
@@ -38,21 +38,23 @@ class App extends Component {
   }
 
   tf(word, string) {
-    var s = string.split(" ");
+    var natural = require("natural");
+    var tokenizer = new natural.WordTokenizer();
+    var s = tokenizer.tokenize(string);
     console.log("tf : " + word + " "+ this.occurences(string, word, true)/(s.length));
     return this.occurences(string, word, true)/(s.length);
   }
 
   idf(word){
     var inc = 1;
-    for(var i = 0; i < RESPONSES.length; i++) 
+    for(var i = 0; i < this.state.responses.length; i++) 
     {
-      if(RESPONSES[i][0].includes(word)) {
+      if(this.state.responses[i][0].includes(word)) {
         inc++;
       }
     }
     console.log("idf : " + word + " " +inc);
-    return Math.log10(RESPONSES.length/inc);
+    return Math.log10(this.state.responses.length/inc);
   }
 
   tfidf(word, string) {
@@ -64,7 +66,9 @@ class App extends Component {
   similarity(string1, string2) {
 
     var sim = 0;
-    var s1 = string1.split(" ");
+    var natural = require("natural");
+    var tokenizer = new natural.WordTokenizer();
+    var s1 = tokenizer.tokenize(string1);
     for(var i = 0; i < s1.length; i++) {
       sim = sim + this.tfidf(s1[i], string2);
     }
@@ -94,11 +98,11 @@ class App extends Component {
       }
     }
     console.log(freq);
-    if(freq > 0.01) {
+    if(freq > 0.1) {
       response = this.state.responses[index][1];
     }
     else {
-      response = "Désolé, je n'ai pas bien compris, pouvez vous reformuler?";
+      response = "Sorry, I didn't understand well !!";
     }
     const dateResponse = new Date().getHours() + ":" + ("0"+new Date().getMinutes().toString()).substring(("0"+(new Date().getMinutes()).toString()).length-2,("0"+(new Date().getMinutes()).toString()).length) + " | " + monthNames[new Date().getMonth()] + " " + ("0"+new Date().getDate().toString()).substring(("0"+(new Date().getDate()).toString()).length-2,("0"+(new Date().getDate()).toString()).length);
     const msgResponse = {id:"chatbot", msg: response, date:dateResponse};
